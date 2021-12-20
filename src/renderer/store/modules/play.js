@@ -36,6 +36,7 @@ const state = () => ({
     original_play_list: [], // 原始列表
     current_song_index: -1, // 当前播放歌曲索引
     history_play_list: [], // 历史播放列表
+	random_play_list:[], //随机播放列表
     playing: false, // 音频是否播放
     videoPlaying: false, // 视频是否播放
     source: ls.get(SOURCE_KEY, ""), // 音视频播放源
@@ -56,6 +57,7 @@ const getters = {
     playing: (state) => state.playing,
     original_play_list: (state) => state.original_play_list,
     history_play_list: (state) => state.history_play_list,
+	random_play_list:(state)=>state.random_play_list,
     current_play_list: (state) => state.current_play_list,
     current_song_index: (state) => state.current_song_index,
     fullscreen: (state) => state.fullscreen,
@@ -123,6 +125,15 @@ const mutations = {
     SET_MUTED(state, flag) {
         state.isMuted = flag;
     },
+	ADD_SONG(state,song){
+        state.current_play_list.push(song);
+	},
+	REMOVE_SONG(state,songIdx){
+		state.current_play_list.splice(songIdx,1)
+		if(songIdx<state.current_song_index || songIdx==state.current_play_list.length){
+			state.current_song_index--;
+		}
+	}
 };
 
 const actions = {

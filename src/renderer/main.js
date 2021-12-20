@@ -11,12 +11,13 @@ import "./directives";
 import createdInit from "./core/createdInit";
 import "./styles/index.less";
 import { errorCaptured } from "./utils/assist";
-
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.prototype.$db = db;
 Vue.prototype.$errorCaptured = errorCaptured;
 if (!process.env.IS_WEB) Vue.use(require("vue-electron"));
 Vue.config.productionTip = false;
-
+Vue.use(ElementUI);
 /* eslint-disable no-new */
 new Vue({
     components: { App },
